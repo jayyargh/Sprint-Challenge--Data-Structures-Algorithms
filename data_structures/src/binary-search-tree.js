@@ -7,13 +7,29 @@ class BinarySearchTree {
 
   depthFirstForEach(cb) {
     /* Your code here */
-    
+    const search = currentNode => {
+      cb(currentNode.value);
+
+      currentNode.left ? search(currentNode.left) : null;
+      currentNode.right ? search(currentNode.right) : null;
+    };
+    search(this);
   }
 
   breadthFirstForEach(cb) {
     /* Your code here */
+    let queue = [];
+    queue.push(this);
 
+    while (queue.length) {
+      const currentNode = queue.shift();
+      cb(currentNode.value);
+      currentNode.left ? queue.push(currentNode.left) : null;
+      currentNode.right ? queue.push(currentNode.right) : null;
+    }
   }
+
+  /* My code above */
 
   insert(value) {
     const newNode = new BinarySearchTree(value);
